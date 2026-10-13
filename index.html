@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catatan Uang</title>
+  <meta name="theme-color" content="#0f766e">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>💰 Catatan Uang</h1>
+    <div class="period">
+      <button id="prevMonth" class="icon-btn" aria-label="Bulan sebelumnya">‹</button>
+      <input type="month" id="monthFilter" aria-label="Pilih bulan">
+      <button id="nextMonth" class="icon-btn" aria-label="Bulan berikutnya">›</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="summary">
+      <div class="card stat">
+        <span class="label">Saldo bulan ini</span>
+        <strong id="balance">Rp0</strong>
+      </div>
+      <div class="card stat income">
+        <span class="label">Pemasukan</span>
+        <strong id="totalIncome">Rp0</strong>
+      </div>
+      <div class="card stat expense">
+        <span class="label">Pengeluaran</span>
+        <strong id="totalExpense">Rp0</strong>
+      </div>
+      <div class="card stat">
+        <span class="label">Saldo total (semua waktu)</span>
+        <strong id="allTimeBalance">Rp0</strong>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 id="formTitle">Tambah Transaksi</h2>
+      <form id="txForm" autocomplete="off">
+        <div class="type-toggle" role="radiogroup" aria-label="Jenis transaksi">
+          <label><input type="radio" name="type" value="expense" checked><span>Pengeluaran</span></label>
+          <label><input type="radio" name="type" value="income"><span>Pemasukan</span></label>
+        </div>
+        <div class="grid">
+          <label>Jumlah (Rp)
+            <input type="text" id="amount" inputmode="numeric" placeholder="50.000" required>
+          </label>
+          <label>Tanggal
+            <input type="date" id="date" required>
+          </label>
+          <label>Kategori
+            <select id="category"></select>
+          </label>
+          <label>Keterangan
+            <input type="text" id="note" maxlength="100" placeholder="mis. Makan siang">
+          </label>
+        </div>
+        <div class="actions">
+          <button type="submit" class="btn primary" id="submitBtn">Simpan</button>
+          <button type="button" class="btn" id="cancelEdit" hidden>Batal</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Pengeluaran per Kategori</h2>
+      <div id="categoryChart" class="bars"></div>
+    </section>
+
+    <section class="card">
+      <div class="list-head">
+        <h2>Riwayat Transaksi</h2>
+        <input type="search" id="search" placeholder="Cari…" aria-label="Cari transaksi">
+      </div>
+      <ul id="txList" class="tx-list"></ul>
+      <p id="emptyState" class="empty">Belum ada transaksi di bulan ini.</p>
+    </section>
+
+    <section class="card tools">
+      <h2>Data</h2>
+      <p class="hint">Data tersimpan di browser ini. Ekspor secara berkala sebagai cadangan.</p>
+      <div class="actions">
+        <button class="btn" id="exportCsv">Ekspor CSV</button>
+        <button class="btn" id="exportJson">Cadangkan (JSON)</button>
+        <label class="btn file-btn">Pulihkan (JSON)
+          <input type="file" id="importJson" accept="application/json,.json" hidden>
+        </label>
+        <button class="btn danger" id="clearAll">Hapus Semua</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
